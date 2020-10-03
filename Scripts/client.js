@@ -64,3 +64,28 @@ function addEmployee () {
     $('.inputField').val('');
 }
 
+//iterates through the employee global array, formats the text, and adds the data to the table on the DOM
+function displayEmployees () {
+
+    for (let employee of employees) {
+        //add the row to the table
+        let rowID = `empRow${employees.indexOf(employee)}`;
+        addRowToTable(rowID);
+
+        //add the data to the row
+        addDataToRow(rowID, employee.firstName);
+        addDataToRow(rowID, employee.lastName);
+        addDataToRow(rowID, employee.empID);
+        addDataToRow(rowID, employee.title);
+        addDataToRow(rowID, employee.annualSalary);
+    }
+}
+
+function addRowToTable (id) {
+
+    let rowString = `<tr id="${id}"></tr>`;
+
+    //append the new row to the tbody
+    $('#employeeTbale').child().append(rowString);
+}
+

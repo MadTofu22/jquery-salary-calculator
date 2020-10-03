@@ -23,12 +23,12 @@ main {
     padding: 1%;
 }
 
-#inputForm {
+section {
 
    text-align: center;
 }
 
-#inputFormTable {
+table {
 
     margin-left: auto;
     margin-right: auto;
@@ -47,4 +47,17 @@ button {
     background-color: rgba(0, 176, 181, 1);
     border: rgba(124, 0, 181, 1) solid 2px;
     border-radius: 5px;   
+}
+
+#employeeTable, .empHeader, .empData {
+
+    border: rgba(124, 0, 181, 0.5) solid 5px;
+    border-collapse: collapse;
+}
+
+.empHeader {
+
+    width: 10%;
+    color: rgba(0, 176, 181, 1);
+    text-shadow: 1px 1px rgba(124, 0, 181, 0.5);
 }
