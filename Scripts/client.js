@@ -31,6 +31,7 @@ function onReady () {
     
     console.log('Scripts/jquery.js loaded.');
 
+    displayEmployees();
     //add event handlers
     $('#addEmployeeButton').on('click', () => {
         
@@ -72,20 +73,27 @@ function displayEmployees () {
         let rowID = `empRow${employees.indexOf(employee)}`;
         addRowToTable(rowID);
 
-        //add the data to the row
-        addDataToRow(rowID, employee.firstName);
-        addDataToRow(rowID, employee.lastName);
-        addDataToRow(rowID, employee.empID);
-        addDataToRow(rowID, employee.title);
-        addDataToRow(rowID, employee.annualSalary);
+        //adds the data to the row
+        let properties = Object.keys(employee);
+        let values = Object.values(employee);
+        for (let i=0; i < properties.length; i++) {
+            addDataToRow(rowID, properties[i], values[i]);
+        }
+        //add delete button to end of the table row
+        let deleteButtonString = `<td class="empData"><button id="delBtn${employees.indexOf(employee)}">Delete</button></td>`;
+        $(`#${rowID}`).append(deleteButtonString);
     }
 }
 
 function addRowToTable (id) {
 
     let rowString = `<tr id="${id}"></tr>`;
-
-    //append the new row to the tbody
-    $('#employeeTbale').child().append(rowString);
+    $('#employeeTable').append(rowString);
 }
 
+function addDataToRow (id, prop, data) {
+
+    let row = $(`#${id}`);
+    let tdString = `<td class="empData" class="${prop}Data">${data}</td>`;
+    row.append(tdString);
+}
