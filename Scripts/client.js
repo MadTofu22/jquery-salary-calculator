@@ -2,7 +2,29 @@ console.log('Scripts/client.js loaded.');
 $(onReady);
 
 //define global variables
-let employees = []; //array to store object of employees
+let employees = [
+    {
+        firsName: 'Jack',
+        lastName: 'Stutler',
+        empID: '002',
+        title: 'Vice President',
+        annualSalary: 1000000,    
+    },
+    {
+        firsName: 'Jake',
+        lastName: 'Brost',
+        empID: '003',
+        title: 'Sgt at Arms',
+        annualSalary: 750000,    
+    },
+    {
+        firsName: 'Chris',
+        lastName: 'Drelling',
+        empID: '003',
+        title: 'Grunt',
+        annualSalary: 7.50,    
+    }
+]; //array to store object of employees
 
 //funciton to run code after the site loads
 function onReady () {
@@ -18,6 +40,7 @@ function onReady () {
     
 }
 
+//gets input from the html form, creates a new employee object, then adds that employee to the global array
 function addEmployee () {
 
     //get employee input data from the form
@@ -40,3 +63,4 @@ function addEmployee () {
     //clear the input fields in html form
     $('.inputField').val('');
 }
+
