@@ -2,3 +2,49 @@ body {
 
     background-color: rgba(0, 176, 181, 1);
 }
+
+header {
+
+    background-color: rgba(124, 0, 181, 0.5);
+    border: rgba(124, 0, 181, 0.7) solid 5px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    text-align: center;
+    margin: 1%;
+}
+
+main {
+
+    background-color: rgba(124, 0, 181, 0.5);
+    border: rgba(124, 0, 181, 0.7) solid 5px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin: 1%;
+    padding: 1%;
+}
+
+#inputForm {
+
+   text-align: center;
+}
+
+#inputFormTable {
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.inputField {
+
+    background-color: rgba(0, 176, 181, 1);
+    border: rgba(124, 0, 181, 1) solid 2px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+button {
+
+    background-color: rgba(0, 176, 181, 1);
+    border: rgba(124, 0, 181, 1) solid 2px;
+    border-radius: 5px;   
+}
