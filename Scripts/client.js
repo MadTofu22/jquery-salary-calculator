@@ -35,8 +35,13 @@ function onReady () {
     //add event handlers
     $('#addEmployeeButton').on('click', () => {
         
-        //add check to make sure the form is valid
-        addEmployee();
+        if (validateForm()) {
+            addEmployee();
+            //refreshDisplay();
+        }
+        else {
+            alert('Please fill all fields.');
+        }
     });
     
 }
@@ -94,6 +99,111 @@ function addRowToTable (id) {
 function addDataToRow (id, prop, data) {
 
     let row = $(`#${id}`);
+
     let tdString = `<td class="empData" class="${prop}Data">${data}</td>`;
     row.append(tdString);
+}
+
+
+function validateForm() {
+
+    let numOfPasses = 0;
+    let inputList = $('.inputField');
+  
+    inputList.each(index => {
+  
+      let input = inputList[index];
+      if (validateInput(input)) {
+        numOfPasses++;
+      }
+    });
+  
+    //console.log("in validateForm, numOfPasses:", numOfPasses);
+  
+    if(numOfPasses === inputList.length) {
+      return true;
+    }
+    else {
+      return false;
+    }
+}
+  
+function validateInput(inputEle) {
+  
+    let isRequired = $(inputEle).prop("required");
+    let inputVal = $(inputEle).val();
+  
+    //console.log("in validateInput, isRequired:", isRequired, "inputVal:", inputVal);
+  
+    if(isRequired) {
+      if(inputVal !== "") {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+    else {
+      return true;
+    }
+}
+
+function capFirstLetter(string) {
+
+    let newString = '';
+  
+    for (let index in string) {
+      if (index === '0') {
+        let firstLetter = string.charAt(index);
+        newString = newString + firstLetter.toUpperCase();
+        //console.log('first letter', firstLetter.toUpperCase());
+      }
+      else {
+        newString += string.charAt(index);
+      }
+      //console.log('in capFirstLetter, newString:', newString, 'index', index);
+    }
+    return newString;
+}
+  
+function addCommasToNum(string) {
+  
+    let numOfDigits = string.length;
+    let newString = '';
+  
+    if (numOfDigits > 3){
+      let numOfCommas = Math.floor(numOfDigits/3);
+      let numOfPreCommaDigits = numOfDigits%3;
+      let threeCount = 0;
+      let index = 0;
+  
+      if (numOfPreCommaDigits === 0) {
+        numOfCommas--;
+      }
+  
+      let newLength = numOfDigits + numOfCommas;
+  
+      //console.log('in addCommasToNum, numOfDigits:', numOfDigits, 'newLength:', newLength);
+  
+      for (let i=0; i < newLength; i++) {
+        if (i < numOfPreCommaDigits){
+          newString += string.charAt(index);
+          index++;
+        }
+        else if ((i === numOfPreCommaDigits && i !== 0) || threeCount === 3){
+          newString += ',';
+          threeCount = 0;
+        }
+        else {
+          newString += string.charAt(index);
+          index++;
+          threeCount++;
+        }
+        //console.log('in addCommasToNum loop, i', i, 'index:', index, 'threeCount:', threeCount, 'newString:', newString);
+      }
+      return newString;
+    }
+    else {
+      return string;
+    }
 }
