@@ -9,7 +9,7 @@ let employees = [
         lastName: 'Stutler',
         empID: '002',
         title: 'Vice President',
-        annualSalary: 1000000,    
+        annualSalary: 1000000,
     },
     {
         firsName: 'Jake',
@@ -23,7 +23,7 @@ let employees = [
         lastName: 'Drelling',
         empID: '003',
         title: 'Grunt',
-        annualSalary: 7.50,    
+        annualSalary: 50500,
     }
 ]; //array to store object of employees
 
@@ -86,7 +86,7 @@ function displayEmployee (employee) {
     let properties = Object.keys(employee);
     let values = Object.values(employee);
     for (let i=0; i < properties.length; i++) {
-        addDataToRow(rowID, properties[i], values[i]);
+        addDataToRow(rowID, properties[i], values[i], i);
     }
     //add delete button to end of the table row
     let deleteButtonString = `<td class="empData"><button id="delBtn${employees.indexOf(employee)}">Delete</button></td>`;
@@ -101,13 +101,18 @@ function addRowToTable (id) {
 }
 
 //adds the data from an employee object to the row in index.html
-function addDataToRow (id, prop, data) {
+function addDataToRow (id, prop, data, index) {
 
     let row = $(`#${id}`);
 
     //add check if property is salary to format with commas for display
+    
+    if (prop == 'annualSalary') {
+        data = addCommasToNum(data.toString());
+        data = '$' + data;
+    }
 
-    let tdString = `<td class="empData" class="${prop}Data">${data}</td>`;
+    let tdString = `<td class="empData" id="emp${index}${prop}Data">${data}</td>`;
     row.append(tdString);
 }
 
