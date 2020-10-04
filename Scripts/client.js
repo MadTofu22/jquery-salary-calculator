@@ -31,7 +31,11 @@ function onReady () {
     
     console.log('Scripts/jquery.js loaded.');
 
-    displayEmployees();
+    //initial table fill of employees in global array
+    for (let employee of employees) {
+        displayEmployee(employee);
+    }
+
     //add event handlers
     $('#addEmployeeButton').on('click', () => {
         
@@ -65,37 +69,38 @@ function addEmployee () {
         annualSalary
     };
     employees.push(newEmployee);
+    displayEmployee(newEmployee);
     
     //clear the input fields in html form
     $('.inputField').val('');
 }
 
 //iterates through the employee global array, formats the text, and adds the data to the table on the DOM
-function displayEmployees () {
+function displayEmployee (employee) {
 
-    for (let employee of employees) {
-        //add the row to the table
-        let rowID = `empRow${employees.indexOf(employee)}`;
-        addRowToTable(rowID);
+    //add the row to the table
+    let rowID = `empRow${employees.indexOf(employee)}`;
+    addRowToTable(rowID);
 
-        //adds the data to the row
-        let properties = Object.keys(employee);
-        let values = Object.values(employee);
-        for (let i=0; i < properties.length; i++) {
-            addDataToRow(rowID, properties[i], values[i]);
-        }
-        //add delete button to end of the table row
-        let deleteButtonString = `<td class="empData"><button id="delBtn${employees.indexOf(employee)}">Delete</button></td>`;
-        $(`#${rowID}`).append(deleteButtonString);
+    //adds the data to the row
+    let properties = Object.keys(employee);
+    let values = Object.values(employee);
+    for (let i=0; i < properties.length; i++) {
+        addDataToRow(rowID, properties[i], values[i]);
     }
+    //add delete button to end of the table row
+    let deleteButtonString = `<td class="empData"><button id="delBtn${employees.indexOf(employee)}">Delete</button></td>`;
+    $(`#${rowID}`).append(deleteButtonString);
 }
 
+//adds a table row to the employee data table in index.html
 function addRowToTable (id) {
 
     let rowString = `<tr id="${id}"></tr>`;
     $('#employeeTable').append(rowString);
 }
 
+//adds the data from an employee object to the row in index.html
 function addDataToRow (id, prop, data) {
 
     let row = $(`#${id}`);
@@ -104,7 +109,7 @@ function addDataToRow (id, prop, data) {
     row.append(tdString);
 }
 
-
+//checks if all required input have data entered before accepting the submission
 function validateForm() {
 
     let numOfPasses = 0;
@@ -127,7 +132,8 @@ function validateForm() {
       return false;
     }
 }
-  
+
+//checks each individual input field to make sure it's valid
 function validateInput(inputEle) {
   
     let isRequired = $(inputEle).prop("required");
@@ -146,6 +152,11 @@ function validateInput(inputEle) {
     else {
       return true;
     }
+}
+
+function refreshDisplay () {
+
+
 }
 
 function capFirstLetter(string) {
