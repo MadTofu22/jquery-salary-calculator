@@ -2,6 +2,7 @@ console.log('Scripts/client.js loaded.');
 $(onReady);
 
 //define global variables
+let totalSalary = 0;
 let employees = [
     {
         firsName: 'Jack',
@@ -43,7 +44,7 @@ function onReady () {
             addEmployee();
         }
         else {
-            alert('Please fill all fields.');
+            alert('Please fill all fields correctly.');
         }
     });
     
@@ -116,21 +117,21 @@ function validateForm() {
     let numOfPasses = 0;
     let inputList = $('.inputField');
   
+    //iterate through the inputs and get a total number of passes
     inputList.each(index => {
   
-      let input = inputList[index];
-      if (validateInput(input)) {
-        numOfPasses++;
-      }
+        let input = inputList[index];
+        if (validateInput(input)) {
+            numOfPasses++;
+        }
     });
-  
-    //console.log("in validateForm, numOfPasses:", numOfPasses);
-  
+        
+    //check if the number of passes matches the total number of input then returns true/false
     if(numOfPasses === inputList.length) {
-      return true;
+        return true;
     }
     else {
-      return false;
+        return false;
     }
 }
 
@@ -139,22 +140,35 @@ function validateInput(inputEle) {
   
     let isRequired = $(inputEle).prop("required");
     let inputVal = $(inputEle).val();
-  
-    //console.log("in validateInput, isRequired:", isRequired, "inputVal:", inputVal);
-  
+    
+    //checks if the input is required, if not it counts as an auto pass
     if(isRequired) {
-      if(inputVal !== "") {
-        return true;
-      }
-      else {
-        return false;
-      }
+        //check to make sure the input is not blank
+        if(inputVal !== "") {
+            //checks if the current input being checked is the annualSalary
+            if (($(inputEle).prop('id') === 'annualSalary')) {
+                //check to make sure the annual salary input has no commas or letters
+                if (inputVal === Number(inputVal)) {
+                    return true;
+                }
+                else {
+                    alert('Please only enter a number only.');
+                }
+            }
+            else {
+                return true;
+            }
+        }
+        else {
+            return false;
+        }
     }
     else {
-      return true;
+        return true;
     }
 }
 
+//takes a string input and ensure the first letter is capitalized
 function capFirstLetter(string) {
 
     let newString = '';
@@ -172,7 +186,8 @@ function capFirstLetter(string) {
     }
     return newString;
 }
-  
+
+//takes a string input and ensures there is a comma ever 3 digits to separate thousands, millions, billions, etc...
 function addCommasToNum(string) {
   
     let numOfDigits = string.length;
