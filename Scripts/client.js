@@ -41,7 +41,6 @@ function onReady () {
         
         if (validateForm()) {
             addEmployee();
-            //refreshDisplay();
         }
         else {
             alert('Please fill all fields.');
@@ -54,11 +53,11 @@ function onReady () {
 function addEmployee () {
 
     //get employee input data from the form
-    let firstName = $('#firstName').val();
-    let lastName = $('#lastName').val();
+    let firstName = capFirstLetter($('#firstName').val());
+    let lastName = capFirstLetter($('#lastName').val());
     let empID = $('#empID').val();
-    let title = $('#title').val();
-    let annualSalary = $('#annualSalary').val();
+    let title = capFirstLetter($('#title').val());
+    let annualSalary = Number($('#annualSalary').val());
 
     //create the new employee object and add it to the global array
     let newEmployee = {
@@ -104,6 +103,8 @@ function addRowToTable (id) {
 function addDataToRow (id, prop, data) {
 
     let row = $(`#${id}`);
+
+    //add check if property is salary to format with commas for display
 
     let tdString = `<td class="empData" class="${prop}Data">${data}</td>`;
     row.append(tdString);
@@ -152,11 +153,6 @@ function validateInput(inputEle) {
     else {
       return true;
     }
-}
-
-function refreshDisplay () {
-
-
 }
 
 function capFirstLetter(string) {
