@@ -9,7 +9,7 @@ At the bottom of the page will be the current monthly total spent on company wid
 This project was created as a weekend challenge while attending [Prime Digital Academy](www.primeacademy.io) in week 1 of Tier 2.
 
 ## Screenshot
-[![Salary Calculator Preview](https://github.com/MadTofu22/jquery-salary-calculator/blob/master/Salary-Calculator-Example.png)]
+![Salary Calculator Preview](https://github.com/MadTofu22/jquery-salary-calculator/blob/master/Salary-Calculator-Example.png)
 
 ## Usage
 
