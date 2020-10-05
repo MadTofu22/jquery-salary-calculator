@@ -4,29 +4,7 @@ $(onReady);
 //define global variables
 let totalSalary = 0;
 let monthlyTotal = 0;
-let employees = [
-    {
-        firstName: 'Jack',
-        lastName: 'Stutler',
-        empID: '002',
-        title: 'Vice President',
-        annualSalary: 100000,
-    },
-    {
-        firstName: 'Jake',
-        lastName: 'Brost',
-        empID: '003',
-        title: 'Sgt at Arms',
-        annualSalary: 75000,    
-    },
-    {
-        firstName: 'Chris',
-        lastName: 'Drelling',
-        empID: '004',
-        title: 'Grunt',
-        annualSalary: 50500,
-    }
-]; //array to store object of employees
+let employees = [];
 
 //funciton to run code after the site loads
 function onReady () {
@@ -275,7 +253,7 @@ function deleteEmployee (row) {
     //get the employees array index from the row id and remove the employee from the array
     let employeeIndex = Number(row.prop('id').slice(6)); //removes empRow and converts to a number
     employees.splice(employeeIndex, 1);
-    
+
     //delete the row from the table on the DOM
     $(row).remove();
 }
