@@ -5,21 +5,21 @@ $(onReady);
 let totalSalary = 0;
 let employees = [
     {
-        firsName: 'Jack',
+        firstName: 'Jack',
         lastName: 'Stutler',
         empID: '002',
         title: 'Vice President',
         annualSalary: 100000,
     },
     {
-        firsName: 'Jake',
+        firstName: 'Jake',
         lastName: 'Brost',
         empID: '003',
         title: 'Sgt at Arms',
         annualSalary: 75000,    
     },
     {
-        firsName: 'Chris',
+        firstName: 'Chris',
         lastName: 'Drelling',
         empID: '004',
         title: 'Grunt',
@@ -93,14 +93,14 @@ function displayEmployee (employee) {
         addDataToRow(rowID, properties[i], values[i], i);
     }
     //add delete button to end of the table row
-    let deleteButtonString = `<td class="empData"><button id="delBtn${employees.indexOf(employee)}">Delete</button></td>`;
+    let deleteButtonString = `<td class="empDeleteButton"><button id="delBtn${employees.indexOf(employee)}">Delete</button></td>`;
     $(`#${rowID}`).append(deleteButtonString);
 }
 
 //adds a table row to the employee data table in index.html
 function addRowToTable (id) {
 
-    let rowString = `<tr id="${id}"></tr>`;
+    let rowString = `<tr class="empData" id="${id}"></tr>`;
     $('#employeeTable').append(rowString);
 }
 
@@ -116,7 +116,7 @@ function addDataToRow (id, prop, data, index) {
         data = '$' + data;
     }
 
-    let tdString = `<td class="empData" id="emp${index}${prop}Data">${data}</td>`;
+    let tdString = `<td class="emp_${prop}Data" id="emp${index}${prop}Data">${data}</td>`;
     row.append(tdString);
 }
 
