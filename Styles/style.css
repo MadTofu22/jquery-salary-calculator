@@ -25,7 +25,7 @@ main {
 
 section {
 
-   text-align: center;
+    text-align: center;
 }
 
 table {
@@ -62,13 +62,14 @@ button {
     text-shadow: 1px 1px rgba(124, 0, 181, 0.5);
 }
 
-#salaryTotal {
-
-    text-align: right;
+#monthlyTotal {
+    
+    display: inline-block;
+    padding: 1%;
 }
 
-.salaryOverBudget {
+.overBudget {
 
-    color: red;
+    background-color: red;
     font-weight: bolder;
 }

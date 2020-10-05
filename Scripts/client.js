@@ -9,19 +9,19 @@ let employees = [
         lastName: 'Stutler',
         empID: '002',
         title: 'Vice President',
-        annualSalary: 1000000,
+        annualSalary: 100000,
     },
     {
         firsName: 'Jake',
         lastName: 'Brost',
         empID: '003',
         title: 'Sgt at Arms',
-        annualSalary: 750000,    
+        annualSalary: 75000,    
     },
     {
         firsName: 'Chris',
         lastName: 'Drelling',
-        empID: '003',
+        empID: '004',
         title: 'Grunt',
         annualSalary: 50500,
     }
@@ -37,11 +37,15 @@ function onReady () {
         displayEmployee(employee);
     }
 
-    //add event handlers
+    //initial display of monthly total salary
+    displayMonthlyTotal();
+
+    //add event handler to Add Employee button
     $('#addEmployeeButton').on('click', () => {
         
         if (validateForm()) {
             addEmployee();
+            displayMonthlyTotal();
         }
         else {
             alert('Please fill all fields correctly.');
@@ -153,7 +157,7 @@ function validateInput(inputEle) {
             //checks if the current input being checked is the annualSalary
             if (($(inputEle).prop('id') === 'annualSalary')) {
                 //check to make sure the annual salary input has no commas or letters
-                if (inputVal === Number(inputVal)) {
+                if (inputVal == Number(inputVal)) {
                     return true;
                 }
                 else {
@@ -232,5 +236,25 @@ function addCommasToNum(string) {
     }
     else {
       return string;
+    }
+}
+
+//updates the total salary and displays on the dom
+function displayMonthlyTotal () {
+
+    let monthlyTotal = 0;
+    totalSalary = 0;
+
+    //iterate through the array and calculate the total monthly salaray
+    for (let employee of employees) {
+        totalSalary += employee.annualSalary;
+    }
+
+    monthlyTotal = Math.round(totalSalary/12);
+    let monthlyTotalString = addCommasToNum(monthlyTotal.toString());
+
+    $('#monthlyTotal').text(`Monthly Total: $ ${monthlyTotalString}`);
+    if (monthlyTotal >= 20000) {
+        $('#monthlyTotal').addClass('overBudget');
     }
 }
