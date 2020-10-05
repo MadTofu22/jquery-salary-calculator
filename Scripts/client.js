@@ -3,6 +3,7 @@ $(onReady);
 
 //define global variables
 let totalSalary = 0;
+let monthlyTotal = 0;
 let employees = [
     {
         firstName: 'Jack',
@@ -52,6 +53,14 @@ function onReady () {
         }
     });
     
+    //add event handler to the Delete buttons
+    $('#employeeTable').children().children().children().children().on('click', event => {
+
+        //get the row element from the parent tree of the button (tr > td > button) and delete the employee then update the monthly total
+        let rowEle = $(event.target).parent().parent();
+        deleteEmployee(rowEle);
+        displayMonthlyTotal();
+    });
 }
 
 //gets input from the html form, creates a new employee object, then adds that employee to the global array
@@ -242,7 +251,8 @@ function addCommasToNum(string) {
 //updates the total salary and displays on the dom
 function displayMonthlyTotal () {
 
-    let monthlyTotal = 0;
+    let monthlyTotalString = '';
+    monthlyTotal = 0;
     totalSalary = 0;
 
     //iterate through the array and calculate the total monthly salaray
@@ -251,10 +261,21 @@ function displayMonthlyTotal () {
     }
 
     monthlyTotal = Math.round(totalSalary/12);
-    let monthlyTotalString = addCommasToNum(monthlyTotal.toString());
+    monthlyTotalString = addCommasToNum(monthlyTotal.toString());
 
     $('#monthlyTotal').text(`Monthly Total: $ ${monthlyTotalString}`);
     if (monthlyTotal >= 20000) {
         $('#monthlyTotal').addClass('overBudget');
     }
+}
+
+//removes an employee from the global array, removes the employee data from the table, and recalculate the monthly total
+function deleteEmployee (row) {
+
+    //get the employees array index from the row id and remove the employee from the array
+    let employeeIndex = Number(row.prop('id').slice(6)); //removes empRow and converts to a number
+    employees.splice(employeeIndex, 1);
+    
+    //delete the row from the table on the DOM
+    $(row).remove();
 }
