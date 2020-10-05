@@ -14,6 +14,7 @@ This project was created as a weekend challenge while attending [Prime Digital A
 ## Usage
 
 1. Fill in all input fields for each employee.
+    1. Do not add commas or decimals to annual salary.
 2. Submit the employee using the Add Employee button.
 3. See the calculation unfold infront of you!
 
